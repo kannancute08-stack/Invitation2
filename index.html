@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Royal Unrolling</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Eagle+Lake&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --parchment: #f2e8c9;
+            --ink: #2c1e16;
+            --royal-red: #8b0000;
+            --wood: #4a2c1d;
+            --gold: #b8860b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: #1a0f0a;
+            background-image: url('https://www.transparenttextures.com/patterns/dark-wood.png');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 40px 20px;
+        }
+
+        /* Container for the whole scroll assembly */
+        .scroll-container {
+            position: relative;
+            width: clamp(320px, 95vw, 700px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Fixed Wooden Roller at the Top */
+        .roller-top {
+            width: 105%;
+            height: 30px;
+            background: linear-gradient(to bottom, #3d2418, #5d3a28, #3d2418);
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 20;
+            border: 1px solid #2a1810;
+        }
+
+        /* The Moving Roller at the Bottom */
+        .roller-bottom {
+            position: absolute;
+            width: 105%;
+            height: 30px;
+            background: linear-gradient(to bottom, #3d2418, #5d3a28, #3d2418);
+            border-radius: 5px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3), 0 5px 15px rgba(0,0,0,0.5);
+            z-index: 20;
+            top: 0;
+            animation: rollToBottom 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+        }
+
+        /* The Parchment Paper */
+        .parchment {
+            background-color: var(--parchment);
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            width: 100%;
+            height: 0; /* Starts closed */
+            opacity: 0;
+            overflow: hidden;
+            position: relative;
+            padding: 0 40px;
+            box-shadow: inset 0 0 100px rgba(139, 69, 19, 0.2);
+            
+            /* Torn edge effect */
+            clip-path: polygon(0% 0%, 100% 0%, 100% 98%, 95% 100%, 90% 98%, 85% 100%, 80% 98%, 75% 100%, 70% 98%, 65% 100%, 60% 98%, 55% 100%, 50% 98%, 45% 100%, 40% 98%, 35% 100%, 30% 98%, 25% 100%, 20% 98%, 15% 100%, 10% 98%, 5% 100%, 0% 98%);
+            
+            animation: expandPaper 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+            color: var(--ink);
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes rollToBottom {
+            0% { top: 0; transform: rotate(0deg); }
+            100% { top: 100%; transform: rotate(720deg) translateY(-15px); }
+        }
+
+        @keyframes expandPaper {
+            0% { height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; }
+            10% { opacity: 1; }
+            100% { height: clamp(600px, 85vh, 900px); opacity: 1; padding-top: 60px; padding-bottom: 80px; }
+        }
+
+        /* Content Styling */
+        .content {
+            opacity: 0;
+            animation: fadeInContent 1s ease-in 2s forwards;
+            font-family: 'IM Fell English SC', serif;
+        }
+
+        @keyframes fadeInContent {
+            to { opacity: 1; }
+        }
+
+        .decoration { font-size: 2.5rem; color: var(--royal-red); margin-bottom: 10px; }
+        
+        h1 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            color: var(--royal-red);
+            margin-bottom: 20px;
+        }
+
+        .script {
+            font-family: 'Eagle Lake', cursive;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        .divider {
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 20px auto;
+        }
+
+        .details { font-size: 1.2rem; line-height: 1.8; }
+
+        .wax-seal {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 35px;
+            background: #8b0000;
+            color: white;
+            text-decoration: none;
+            font-family: 'Cinzel Decorative', serif;
+            border-radius: 50% 40% 50% 45%;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+            transition: 0.3s;
+            border: 2px solid #5a0000;
+        }
+
+        .wax-seal:hover { transform: scale(1.1); background: #a50000; }
+
+        @media (max-width: 480px) {
+            .parchment { padding: 0 20px; }
+            @keyframes expandPaper {
+                100% { height: 90vh; opacity: 1; padding-top: 50px; }
+            }
+            @keyframes rollToBottom {
+                100% { top: 90vh; transform: rotate(720deg) translateY(-15px); }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-container">
+        <div class="roller-top"></div>
+        
+        <div class="parchment">
+            <div class="content">
+                <div class="decoration">❧</div>
+                <p style="letter-spacing: 4px;">HEAR YE, HEAR YE</p>
+                <h1>Grand Feast</h1>
+                <p class="script">To the noble house of our kin</p>
+                
+                <div class="divider"></div>
+                
+                <div class="details">
+                    Join us for an evening of <br>
+                    revelry and fine spirits on the
+                    <p style="font-weight: bold; margin: 10px 0; font-size: 1.4rem;">14th of December</p>
+                    at the hour of seven.
+                    <br><br>
+                    <strong>The Golden Hall</strong>
+                </div>
+
+                <div class="divider"></div>
+                
+                <a href="#" class="wax-seal">RSVP</a>
+            </div>
+        </div>
+
+        <div class="roller-bottom"></div>
+    </div>
+
+</body>
+</html>
