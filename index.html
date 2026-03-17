@@ -2,190 +2,202 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.90">
-    <title>The Royal Unrolling</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinner Invitation | Flag Staff House</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Eagle+Lake&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --parchment: #f2e8c9;
-            --ink: #2c1e16;
-            --royal-red: #8b0000;
-            --wood: #4a2c1d;
+            --parchment: #fdfaf0;
+            --ink: #1a1a1a;
             --gold: #b8860b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #1a0f0a;
-            background-image: url('https://www.transparenttextures.com/patterns/dark-wood.png');
+            background-color: #050505;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            padding: 40px 20px;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* Container for the whole scroll assembly */
+        /* --- Buddha Background Image with 90% Transparency --- */
+        .buddha-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 90% transparency means 0.1 opacity */
+            opacity: 0.1; 
+            z-index: -1;
+            /* Using the local file path provided */
+            background-image: url('file:///C:/Users/multimedia 2/Desktop/INVITATION/bg.png');
+            background-size: cover;
+            background-position: center;
+        }
+
         .scroll-container {
             position: relative;
-            width: clamp(320px, 85vw, 700px);
+            width: clamp(320px, 90vw, 750px);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* Fixed Wooden Roller at the Top */
-        .roller-top {
+        /* Roller Styling */
+        .roller {
             width: 105%;
-            height: 30px;
-            background: linear-gradient(to bottom, #3d2418, #5d3a28, #3d2418);
+            height: 35px;
+            background: linear-gradient(to bottom, #2a1810, #5d3a28, #2a1810);
             border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 20;
-            border: 1px solid #2a1810;
+            z-index: 10;
+            border: 1px solid #1a0f0a;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        /* The Moving Roller at the Bottom */
         .roller-bottom {
             position: absolute;
-            width: 105%;
-            height: 30px;
-            background: linear-gradient(to bottom, #3d2418, #5d3a28, #3d2418);
-            border-radius: 5px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.3), 0 5px 15px rgba(0,0,0,0.5);
-            z-index: 20;
             top: 0;
-            animation: rollToBottom 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
+            animation: rollDown 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
         }
 
-        /* The Parchment Paper */
+        /* Parchment Styling */
         .parchment {
             background-color: var(--parchment);
             background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
             width: 100%;
-            height: 0; /* Starts closed */
+            height: 0;
             opacity: 0;
             overflow: hidden;
-            position: relative;
-            padding: 0 40px;
-            box-shadow: inset 0 0 100px rgba(139, 69, 19, 0.2);
-            
-            /* Torn edge effect */
-            clip-path: polygon(0% 0%, 100% 0%, 100% 98%, 95% 100%, 90% 98%, 85% 100%, 80% 98%, 75% 100%, 70% 98%, 65% 100%, 60% 98%, 55% 100%, 50% 98%, 45% 100%, 40% 98%, 35% 100%, 30% 98%, 25% 100%, 20% 98%, 15% 100%, 10% 98%, 5% 100%, 0% 98%);
-            
+            box-shadow: inset 0 0 100px rgba(139, 69, 19, 0.15), 0 10px 30px rgba(0,0,0,0.5);
             animation: expandPaper 2.5s cubic-bezier(0.45, 0.05, 0.55, 0.95) forwards;
-            color: var(--ink);
             text-align: center;
+            color: var(--ink);
         }
 
-        /* Animations */
-        @keyframes rollToBottom {
+        /* Animation Keyframes */
+        @keyframes rollDown {
             0% { top: 0; transform: rotate(0deg); }
-            100% { top: 100%; transform: rotate(720deg) translateY(-15px); }
+            100% { top: 100%; transform: rotate(720deg) translateY(-18px); }
         }
 
         @keyframes expandPaper {
-            0% { height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; }
+            0% { height: 0; opacity: 0; }
             10% { opacity: 1; }
-            100% { height: clamp(600px, 85vh, 900px); opacity: 1; padding-top: 60px; padding-bottom: 80px; }
+            100% { height: 650px; opacity: 1; }
         }
 
         /* Content Styling */
         .content {
+            padding: 60px 40px;
             opacity: 0;
-            animation: fadeInContent 1s ease-in 2s forwards;
-            font-family: 'IM Fell English SC', serif;
+            animation: fadeInText 1s ease-in 2.2s forwards;
         }
 
-        @keyframes fadeInContent {
+        @keyframes fadeInText {
             to { opacity: 1; }
         }
 
-        .decoration { font-size: 2.5rem; color: var(--royal-red); margin-bottom: 10px; }
-        
-        h1 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(2rem, 8vw, 3.5rem);
-            color: var(--royal-red);
-            margin-bottom: 20px;
+        .intro {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
 
-        .script {
-            font-family: 'Eagle Lake', cursive;
-            font-size: 1.3rem;
+        .name {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.5rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: #000;
             margin-bottom: 30px;
-        }
-
-        .divider {
-            width: 50%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 20px auto;
-        }
-
-        .details { font-size: 1.2rem; line-height: 1.8; }
-
-        .wax-seal {
+            border-bottom: 1px solid var(--gold);
             display: inline-block;
-            margin-top: 40px;
-            padding: 15px 35px;
-            background: #8b0000;
-            color: white;
-            text-decoration: none;
-            font-family: 'Cinzel Decorative', serif;
-            border-radius: 50% 40% 50% 45%;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-            transition: 0.3s;
-            border: 2px solid #5a0000;
+            padding-bottom: 10px;
         }
 
-        .wax-seal:hover { transform: scale(1.1); background: #a50000; }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            text-align: left;
+        }
+
+        .details-grid div {
+            display: flex;
+            align-items: baseline;
+        }
+
+        .label {
+            font-style: italic;
+            font-size: 1rem;
+            color: #666;
+            width: 40px;
+            flex-shrink: 0;
+        }
+
+        .val { font-weight: 700; }
+
+        .footer-info {
+            text-align: left;
+            margin-top: 40px;
+            font-size: 1rem;
+            line-height: 1.8;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        .footer-info b { font-family: 'Montserrat', sans-serif; font-weight: 600; }
 
         @media (max-width: 480px) {
-            .parchment { padding: 0 20px; }
+            .details-grid { grid-template-columns: 1fr; }
+            .content { padding: 40px 20px; }
             @keyframes expandPaper {
-                100% { height: 90vh; opacity: 1; padding-top: 50px; }
+                100% { height: 85vh; opacity: 1; }
             }
-            @keyframes rollToBottom {
-                100% { top: 90vh; transform: rotate(720deg) translateY(-15px); }
+            @keyframes rollDown {
+                100% { top: 100%; transform: rotate(720deg) translateY(-20px); }
             }
         }
     </style>
 </head>
 <body>
 
+    <div class="buddha-bg"></div>
+
     <div class="scroll-container">
-        <div class="roller-top"></div>
+        <div class="roller roller-top"></div>
         
         <div class="parchment">
             <div class="content">
-                <div class="decoration">❧</div>
-                <p style="letter-spacing: 4px;">HEAR YE, HEAR YE</p>
-                <h1>Grand Feast</h1>
-                <p class="script">To the noble house of our kin</p>
-                
-                <div class="divider"></div>
-                
-                <div class="details">
-                    Join us for an evening of <br>
-                    revelry and fine spirits on the
-                    <p style="font-weight: bold; margin: 10px 0; font-size: 1.4rem;">14th of December</p>
-                    at the hour of seven.
-                    <br><br>
-                    <strong>The Golden Hall</strong>
+                <p class="intro">request the pleasure of the company of</p>
+                <h1 class="name">Mr Aniket Govind Mandavgane</h1>
+
+                <div class="details-grid">
+                    <div><span class="label">to</span> <span class="val">Dinner</span></div>
+                    <div><span class="label">at</span> <span class="val">Flag Staff House</span></div>
+                    <div><span class="label">on</span> <span class="val">12 Mar 2026</span></div>
+                    <div><span class="label">at</span> <span class="val">6.45 P.M.</span></div>
                 </div>
 
-                <div class="divider"></div>
-                
-                <a href="#" class="wax-seal">RSVP</a>
+                <div class="footer-info">
+                    <p><b>RSVP :</b> ADC to Commandant (Regrets only)</p>
+                    <p><b>Dress :</b> Formals</p>
+                    <p><b>Mob :</b> +91-8874915524</p>
+                </div>
             </div>
         </div>
 
-        <div class="roller-bottom"></div>
+        <div class="roller roller-bottom"></div>
     </div>
 
 </body>
