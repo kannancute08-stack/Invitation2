@@ -24,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 80vh;
             overflow: hidden;
             padding: 40px 20px;
         }
@@ -32,7 +32,7 @@
         /* Container for the whole scroll assembly */
         .scroll-container {
             position: relative;
-            width: clamp(320px, 90vw, 700px);
+            width: clamp(320px, 80vw, 700px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -91,7 +91,7 @@
         @keyframes expandPaper {
             0% { height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; }
             10% { opacity: 1; }
-            100% { height: clamp(600px, 80vh, 900px); opacity: 1; padding-top: 60px; padding-bottom: 80px; }
+            100% { height: clamp(600px, 70vh, 900px); opacity: 1; padding-top: 60px; padding-bottom: 80px; }
         }
 
         /* Content Styling */
